@@ -1,0 +1,15 @@
+#+title: Progress documentation
+
+* libs
++ [[https://rocket.rs/v0.4/][rocket]]
+  web framework
+
++ [[https://serde.rs/][serde]]
+  JSON serialize/deserialize
+
++ [[https://diesel.rs/][diesel]]
+  DB integration
+
++ [[https://docs.rs/r2d2/0.8.2/r2d2/index.html][r2d2]]
+  DB connection pool
+  - ex: https://www.youtube.com/watch?v=Ck_bOoRjKdQ
