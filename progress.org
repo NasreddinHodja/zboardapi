@@ -8,7 +8,8 @@
   JSON serialize/deserialize
 
 + [[https://diesel.rs/][diesel]]
-  DB integration
+  DB integration ([[https://wiki.archlinux.org/title/PostgreSQL][postgres]])
+  - [[https://diesel.rs/guides/getting-started][getting started]]
 
 + [[https://docs.rs/r2d2/0.8.2/r2d2/index.html][r2d2]]
   DB connection pool
