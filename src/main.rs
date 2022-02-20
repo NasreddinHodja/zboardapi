@@ -35,7 +35,10 @@ fn rocket() -> rocket::Rocket {
         .manage(pool)
         .mount(
             "/api",
-            routes![get_all, new_user, find_user, remove_user],
+            routes![
+                get_all_users, new_user, find_user, remove_user,
+                get_all_posts, new_post, find_post, remove_post,
+            ],
         )
 }
 
