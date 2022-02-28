@@ -1,11 +1,11 @@
 use super::db::Conn as DbConn;
 use rocket_contrib::json::Json;
+use rocket::http::RawStr;
 use super::models::{
     User, NewUserData,
-    Post, NewPostData, PostIdData,
+    Post, NewPostData,
 };
 use serde_json::Value;
-use crate::models::UserNameData;
 
 #[get("/users")]
 pub fn get_all_users(conn: DbConn) -> Json<Value> {
@@ -24,9 +24,9 @@ pub fn new_user(conn: DbConn, new_user: Json<NewUserData>) -> Json<Value> {
     }))
 }
 
-#[post("/get-user", format = "application/json", data = "<user_data>")]
-pub fn find_user(conn: DbConn, user_data: Json<UserNameData>) -> Json<Value> {
-    let result = User::get_by_username(user_data.into_inner(), &conn);
+#[get("/user/<id>")]
+pub fn get_user(conn: DbConn, id: i32) -> Json<Value> {
+    let result = User::get(id, &conn);
 
     Json(json!({
         "status": if result.len() == 0 { 404 } else { 200 },
@@ -34,9 +34,28 @@ pub fn find_user(conn: DbConn, user_data: Json<UserNameData>) -> Json<Value> {
     }))
 }
 
-#[post("/remove-user", format = "application/json", data = "<user_data>")]
-pub fn remove_user(conn: DbConn, user_data: Json<UserNameData>) -> Json<Value> {
-    User::remove_by_username(user_data.into_inner(), &conn);
+#[get("/user/<name>", rank = 2)]
+pub fn get_user_by_name(conn: DbConn, name: &RawStr) -> Json<Value> {
+    let result = User::get_by_username(name.as_str(), &conn);
+
+    Json(json!({
+        "status": if result.len() == 0 { 404 } else { 200 },
+        "result": result,
+    }))
+}
+
+#[get("/remove-user/<id>")]
+pub fn remove_user(conn: DbConn, id: i32) -> Json<Value> {
+    User::remove(id, &conn);
+
+    Json(json!({
+        "status": 200
+    }))
+}
+
+#[get("/remove-user/<name>", rank = 2)]
+pub fn remove_user_by_username(conn: DbConn, name: &RawStr) -> Json<Value> {
+    User::remove_by_username(name.as_str(), &conn);
 
     Json(json!({
         "status": 200
@@ -60,9 +79,9 @@ pub fn new_post(conn: DbConn, new_post: Json<NewPostData>) -> Json<Value> {
     }))
 }
 
-#[post("/get-post", format = "application/json", data = "<post_data>")]
-pub fn find_post(conn: DbConn, post_data: Json<PostIdData>) -> Json<Value> {
-    let result = Post::get(post_data.into_inner(), &conn);
+#[get("/post/<id>")]
+pub fn get_post(conn: DbConn, id: i32) -> Json<Value> {
+    let result = Post::get(id, &conn);
 
     Json(json!({
         "status": if result.len() == 0 { 404 } else { 200 },
@@ -70,9 +89,9 @@ pub fn find_post(conn: DbConn, post_data: Json<PostIdData>) -> Json<Value> {
     }))
 }
 
-#[post("/remove-post", format = "application/json", data = "<post_data>")]
-pub fn remove_post(conn: DbConn, post_data: Json<PostIdData>) -> Json<Value> {
-    Post::remove(post_data.into_inner(), &conn);
+#[get("/remove-post/<id>")]
+pub fn remove_post(conn: DbConn, id: i32) -> Json<Value> {
+    Post::remove(id, &conn);
 
     Json(json!({
         "status": 200

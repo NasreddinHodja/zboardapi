@@ -36,8 +36,14 @@ fn rocket() -> rocket::Rocket {
         .mount(
             "/api",
             routes![
-                get_all_users, new_user, find_user, remove_user,
-                get_all_posts, new_post, find_post, remove_post,
+                get_all_users,
+                new_user,
+                get_user, get_user_by_name,
+                remove_user, remove_user_by_username,
+                get_all_posts,
+                new_post,
+                get_post,
+                remove_post,
             ],
         )
 }

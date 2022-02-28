@@ -8,15 +8,15 @@ curl -d '{"username": "zine", "password": "zine"}' \
     -H 'Content-Type: application/json' \
     localhost:8000/api/new-user
 
-# POST get user by username
-curl -d '{"username": "zine"}' \
-    -H 'Content-Type: application/json' \
-    localhost:8000/api/get-user
+# GET get user by id
+curl localhost:8000/api/user/1
+# GET get user by name
+curl localhost:8000/api/user/zine
 
-# POST remove user by username
-curl -d '{"username": "prates"}' \
-    -H 'Content-Type: application/json' \
-    localhost:8000/api/remove-user
+# GET remove user by id
+curl localhost:8000/api/remove-user/1
+# GET remove user by name
+curl localhost:8000/api/remove-user/zine
 
 
 # GET all posts
@@ -27,12 +27,8 @@ curl -d '{"title": "pau no cu", "body": "de quem ta lendo"}' \
     -H 'Content-Type: application/json' \
     localhost:8000/api/new-post
 
-# POST get post by id
-# curl -d '{"id": ""}' \
-#     -H 'Content-Type: application/json' \
-#     localhost:8000/api/get-post
+# GET get post by id
+curl localhost:8000/api/post/1
 
-# POST remove post by id
-# curl -d '{"id": ""}' \
-#     -H 'Content-Type: application/json' \
-#     localhost:8000/api/remove-post
+# GET remove post by id
+curl localhost:8000/api/remove-post/1
