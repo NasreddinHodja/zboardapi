@@ -1,6 +1,6 @@
-#+title: Progress documentation
+#+title: Progress
 
-* Libs
+* Rust Libs
 + [[https://rocket.rs/v0.4/][rocket]]
   web framework
 
@@ -17,46 +17,61 @@
 
 * DB
 ** Setup PostgreSQL
-[[https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart][tutorial]]
+- ref: [[https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart][tutorial]]
 
 + install
   - arch
-    #+begin_src shell
-    sudo pacman -S postgresql
-    #+end_src
+#+begin_src shell
+sudo pacman -S postgresql
+#+end_src
   - ubuntu
-    #+begin_src shell
-    sudo apt install postgresql postgresql-contrib
-    #+end_src
+#+begin_src shell
+sudo apt install postgresql postgresql-contrib
+#+end_src
 
 + start & enable service
-    #+begin_src shell
-    sudo systemctl enable postgresql.service
-    sudo systemctl start postgresql.service
-    #+end_src
+#+begin_src shell
+sudo systemctl enable postgresql.service
+sudo systemctl start postgresql.service
+#+end_src
 
 
 + The installation procedure created a user account called postgres that is associated with the default Postgres role. There are a few ways to utilize this account to access Postgres. One way is to switch over to the postgres account on your server by running the following command
-    #+begin_src shell
-    sudo -i -u postgres
-    #+end_src
+#+begin_src shell
+sudo -i -u postgres
+#+end_src
 
 + then, access postgresql prompt
-    #+begin_src shell
-    psql
-    #+end_src
+#+begin_src shell
+psql
+#+end_src
 
 + OR run psql directly as postgres user
-    #+begin_src shell
-    sudo -u postgres psql
-    #+end_src
+#+begin_src shell
+sudo -u postgres psql
+#+end_src
 
 + create a db (as postgres user)
-    #+begin_src shell
-    createdb imgboard
-    #+end_src
+#+begin_src shell
+createdb imgboard
+#+end_src
 
 + access db
-    #+begin_src shell
-    psql -d imgboard
-    #+end_src
+#+begin_src shell
+psql -d imgboard
+#+end_src
+
+** Diesel
+- ref: [[https://diesel.rs/guides/getting-started][getting started]]
+
++ install diesel_cli with only postgres features
+#+begin_src shell
+cargo install diesel_cli --no-default-features --features postgres
+#+end_src
+
++ setup diesel
+#+begin_src shell
+echo DATABASE_URL=postgres://admin:admin@localhost:5432/imgboard
+diesel setup
+diesel migration run
+#+end_src
