@@ -22,10 +22,9 @@
 + install
   - arch
 #+begin_src shell
+# arch linux
 sudo pacman -S postgresql
-#+end_src
-  - ubuntu
-#+begin_src shell
+# ubuntu
 sudo apt install postgresql postgresql-contrib
 #+end_src
 
