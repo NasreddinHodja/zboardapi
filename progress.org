@@ -16,9 +16,7 @@
   - ex: https://www.youtube.com/watch?v=Ck_bOoRjKdQ
 
 * DB
-** Setup PostgreSQL
-- ref: [[https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart][tutorial]]
-
+** PostgreSQL ([[https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart][ref]])
 + install
   - arch
 #+begin_src shell
@@ -60,9 +58,7 @@ createdb imgboard
 psql -d imgboard
 #+end_src
 
-** Diesel
-- ref: [[https://diesel.rs/guides/getting-started][getting started]]
-
+** Diesel [[https://diesel.rs/guides/getting-started][(ref)]]
 + install diesel_cli with only postgres features
 #+begin_src shell
 cargo install diesel_cli --no-default-features --features postgres
