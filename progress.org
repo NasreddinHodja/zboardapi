@@ -48,7 +48,12 @@ psql
 sudo -u postgres psql
 #+end_src
 
-+ create a db (as postgres user)
++ create new user (u: admin / p: admin) as postgres user
+#+begin_src shell
+createuser --interactive --pwprompt
+#+end_src
+
++ create a db as postgres user
 #+begin_src shell
 createdb imgboard
 #+end_src
